@@ -16,7 +16,11 @@ weekdays = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
 
 
 def actualizar_calendario():
-    
+    """
+    Dibuja los días del mes en la cuadrícula.
+    Si hay una fecha de inicio (start_date), calcula la diferencia de días
+    y aplica el color verde o salmón según el ciclo de 7x7.
+    """
     global start_date 
     
     year = current_date.year
@@ -49,6 +53,10 @@ def actualizar_calendario():
             
 
 def boton_generar_click():
+    """
+    Lee la fecha ingresada por el usuario en la caja de texto.
+    Intenta convertirla a un objeto fecha real; si falla, muestra error.
+    """
     global start_date 
     
     date_str = entry_inicio.get() 
@@ -61,11 +69,13 @@ def boton_generar_click():
     actualizar_calendario() 
 
 def boton_prev_click():
+    """Retrocede al mes anterior restando un día al primero del mes actual."""
     global current_date
     current_date = (current_date.replace(day=1) - timedelta(days=1))
     actualizar_calendario() 
 
 def boton_next_click():
+    """Avanza al mes siguiente sumando los días del mes actual."""
     global current_date
     days_in_month = calendar.monthrange(current_date.year, current_date.month)[1]
     current_date = (current_date.replace(day=1) + timedelta(days=days_in_month))
